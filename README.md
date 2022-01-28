@@ -15,7 +15,7 @@ docker-compose up -d
 - Ensure that you have Docker running on your machine or Kafdrop won't spin up
 - Once running, navigate to localhost:9000 in your browser
 
-![Kafdrop](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s9r5a6z77pyiw3ypr7kv.png)
+![Kafdrop](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0kybolddzl4h6mqzmb4p.png)
 
 - now you can monitor Kafka like a helicopter parent does their college freshman
 
