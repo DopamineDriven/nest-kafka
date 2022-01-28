@@ -159,4 +159,4 @@ interface KafkaClientResponseShape {
     partition: number;
 };
 ```
-- you might be wondering "Hey guy, where the fuck did a union to `Record<string, number | string | symbol>` come from for the type of the `value` field?" which is a perfectly reasonable question. The answer being that this "fallback-union-to-a-forgiving-Record" is added in case we forget to update this interface after adding or removing fields from the value object which are defined in our code. In other words, child fields returned within the `value` field are dependent upon operations in our code and are therefore not static.
+- you might be wondering to yourself "Hey guy, where the fuck did a union to `Record<string, number | string | symbol>` come from for the type of the `value` field?" which is a perfectly reasonable question. The answer being that this "fallback-union-to-a-forgiving-Record" is added in case we forget to update this interface after adding or removing fields from the value object which are defined in our code. In other words, child fields returned within the `value` field are dependent upon operations in our code and are therefore not static.
