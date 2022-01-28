@@ -17,9 +17,9 @@ docker-compose up
 - now you can monitor Kafka like a helicopter parent does their college freshman
 
 ## Three separate repos within the api-gateway directory for Separation of Concerns
-1. api-gateway
-2. auth
-3. billing
-- The api-gateway __dir interacts with HTTP requests
-- The billing __dir is a microservice for handling billing
-- The auth __dir is a microservice for handling users and sensitive info such as stripe ids
+1. api-gateway-service
+2. auth-microservice
+3. billing-microservice
+- The api-gateway-service __dir interacts with HTTP requests
+- The billing-microservice __dir is a microservice for handling billing
+- The auth-microservice __dir is a microservice for handling users and sensitive info such as stripe ids
