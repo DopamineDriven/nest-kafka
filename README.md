@@ -1,6 +1,9 @@
 # nest-kafka-2022
 Kafka, Nestjs Api Gateway, Microservices
 
+
+![Kafka Microservices](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qlqbwcjmy0sh459hxzlc.png)
+
 ## Clone the [Kafka/Kafdrop Repo](https://github.com/obsidiandynamics/kafdrop) in a separate directory
 - Kafdrop is a GUI that is used to monitor Kafka events -- once booted up it runs on localhost:9000
 - From the command line in an arbitrarily named directory of your choosing, run
@@ -124,39 +127,41 @@ cd billing-microservice && yarn install && yarn start:dev
 }
 ```
 
-- this is the shape of a KafkaClient Event
+- this is the shape of the Handle Order Created Event
 - note that the value field, which is a JSON object, contains the fields we've defined in our code
-- Next let's type its shape and use it as a DTO (data transfer object) in our code!
-```ts
-interface KafkaClientResponseShape {
-    magicByte: number;
-    attributes: number;
-    timestamp: string;
-    offset: string;
-    key: null;
-    value: {
-        orderId: string;
-        userId: string;
-        price: number;
-    } | Record<string, number | string | symbol>;
-    headers: {} | Headers | string[][] | Record<string, string>;
-    isControlRecord: boolean;
-    batchContext: {
-        firstOffset: string;
-        firstTimestamp: string;
-        partitionLeaderEpoch: number;
-        inTransaction: boolean;
-        isControlBatch: boolean;
-        lastOffsetDelta: number;
-        producerId: string;
-        producerEpoch: number;
-        firstSequence: number;
-        maxTimestamp: string;
-        timestampType: number;
-        magicByte: number;
-    };
-    topic: string;
-    partition: number;
-};
+
+
+--- 
+## Auth Microservice 
+- from your terminal, cd into the root of the auth-microservice
+- First, install the dependencies. Then, start the microservice:
+
+```bash
+cd auth-microservice && yarn install && yarn start:dev
 ```
-- you might be wondering to yourself "Hey guy, where the fuck did a union to `Record<string, number | string | symbol>` come from for the type of the `value` field?" which is a perfectly reasonable question. The answer being that this "fallback-union-to-a-forgiving-Record" is added in case we forget to update this interface after adding or removing fields from the value object (its constituent fields being defined in our code). In other words, child fields returned within the `value` field are dependent upon operations defined in our code and are therefore dynamic in nature.
+
+- The above command should output something similar to the following
+
+```bash
+[1:59:45 AM] Starting compilation in watch mode...
+
+[1:59:47 AM] Found 0 errors. Watching for file changes.
+
+[Nest] 15622  - 01/28/2022, 2:01:44 AM     LOG [NestFactory] Starting Nest application...
+[Nest] 15622  - 01/28/2022, 2:01:44 AM     LOG [InstanceLoader] AppModule dependencies initialized +25ms
+[Nest] 15622  - 01/28/2022, 2:01:44 AM     LOG [ServerKafka] INFO [Consumer] Starting {"timestamp":"2022-01-28T10:36:44.338Z","logger":"kafkajs","groupId":"auth-consumer-server"}
+[Nest] 15622  - 01/28/2022, 2:01:10 AM     LOG [ServerKafka] INFO [ConsumerGroup] Consumer has joined the group {"timestamp":"2022-01-28T10:37:10.035Z","logger":"kafkajs","groupId":"auth-consumer-server","memberId":"nestjs-consumer-server-2ffa5ec8-65f7-48fb-9534-74b86fc74713","leaderId":"nestjs-consumer-server-2ffa5ec8-65f7-48fb-9534-74b86fc74713","isLeader":true,"memberAssignment":{"get_user.reply":[0]},"groupProtocol":"RoundRobinAssigner","duration":25696}
+[Nest] 15622  - 01/28/2022, 2:01:10 AM     LOG [NestMicroservice] Nest microservice successfully started +7ms
+```
+
+- Head to postman and input this as the body of a POST request to localhost:3000
+
+```json
+{
+	"userId": "Ln33WuxDd0xQA1sauLTz6ZrSKkEG4JUyT1z+AYBouYE=",
+	"price": 34.99
+}
+```
+
+- The first image in the readme showcases the response you should receive in the auth and billing microservices terminals
+
