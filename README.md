@@ -126,3 +126,37 @@ cd billing-microservice && yarn install && yarn start:dev
 
 - this is the shape of a KafkaClient Event
 - note that the value field, which is a JSON object, contains the fields we've defined in our code
+- let's type it its shape and use it as a DTO (data transfer object) in our code
+```ts
+interface KafkaClientResponseShape {
+    magicByte: number;
+    attributes: number;
+    timestamp: string;
+    offset: string;
+    key: null;
+    value: {
+        orderId: string;
+        userId: string;
+        price: number;
+    } | Record<string, number | string | symbol>;
+    headers: {} | Headers | string[][] | Record<string, string>;
+    isControlRecord: boolean;
+    batchContext: {
+        firstOffset: string;
+        firstTimestamp: string;
+        partitionLeaderEpoch: number;
+        inTransaction: boolean;
+        isControlBatch: boolean;
+        lastOffsetDelta: number;
+        producerId: string;
+        producerEpoch: number;
+        firstSequence: number;
+        maxTimestamp: string;
+        timestampType: number;
+        magicByte: number;
+    };
+    topic: string;
+    partition: number;
+};
+```
+- you might be wondering "Hey guy, where the fuck did a union to `Record<string, number | string | symbol>` come from?" which is a perfectly reasonable question. The answer being that this "fallback-union-to-a-forgiving-Record" is added in case we forget to update this interface after adding or removing fields from the value object which are defined in our code. In other words, child fields returned within the `value` field are dependent upon operations in our code and are therefore not static.
