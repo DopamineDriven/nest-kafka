@@ -16,7 +16,7 @@ docker-compose up -d
 
 - now you can monitor Kafka like a helicopter parent does their college freshman
 
-## Three separate repos within the api-gateway directory for Separation of Concerns
+## Three separate Nest Directories for Separation of Concerns
 1. api-gateway-service
 2. auth-microservice
 3. billing-microservice
