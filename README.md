@@ -1,6 +1,4 @@
-# nest-kafka-2022
-Kafka, Nestjs Api Gateway, Microservices
-
+# nest-kafka
 
 ![Kafka Microservices](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qlqbwcjmy0sh459hxzlc.png)
 
