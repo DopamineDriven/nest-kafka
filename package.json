@@ -1,0 +1,14 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:DopamineDriven/nest-kafka.git",
+  "directories": {
+    "api-gateway": "./api-gateway/*"
+  },
+  "author": "Andrew Ross <andrew.ross@cortinahealth.com>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
